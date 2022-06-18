@@ -1,11 +1,15 @@
 {
   "expo": {
-    "name": "ekadasi-app",
-    "slug": "ekadasi-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "name": "ekadasi",
+    "description": "Keep track of upcoming Ekadasi dates.",
+    "slug": "ekadasi",
+    "privacy": "public",
+    "githubUrl": "https://github.com/dominick-designs/react-native-app-ekadasi",
+    "platforms": ["ios", "android", "web"],
+    "version": "0.0.22",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "ekadasi",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -13,22 +17,38 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/6c69fa06-d618-469a-9ff1-4e658617cd5d"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.dominickdesigns.ekadasi",
+      "buildNumber": "0.0.23",
+      "supportsTablet": true,
+      "requireFullScreen": true,
+      "appStoreUrl": "https://apps.apple.com/us/app/next-ekadasi/id1517935088",
+      "infoPlist": {
+        "UIBackgroundModes": ["fetch"]
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+      "package": "com.dominickdesigns.ekadasi",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.dominickdesigns.ekadasi",
+      "useNextNotificationsApi": true,
+      "permissions": [],
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 23
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6c69fa06-d618-469a-9ff1-4e658617cd5d"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

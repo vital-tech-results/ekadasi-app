@@ -1,9 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import useCachedResources from "./hooks/useCachedResources";
+import useColorScheme from "./hooks/useColorScheme";
+import Navigation from "./navigation";
+
+import { SelectProvider } from "@mobile-reality/react-native-select-pro";
+import { TailwindProvider } from "nativewind";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -13,10 +16,14 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+      <TailwindProvider>
+        <SafeAreaProvider>
+          <SelectProvider>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </SelectProvider>
+        </SafeAreaProvider>
+      </TailwindProvider>
     );
   }
 }
