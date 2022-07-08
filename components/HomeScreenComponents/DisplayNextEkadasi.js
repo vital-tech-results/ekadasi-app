@@ -1,96 +1,49 @@
-import React, { Component } from "react";
-import { thisYear2022 } from "../../data/data-array-2022";
-import { Text } from "react-native";
-import NextEkadasiIs from "./NextEkadasiIs";
+import React, { useState } from "react";
+
+import RenderNextEkadasiIsConditionally from "./RenderNextEkadasiIsConditionally";
 import TodayIsEkadasi from "./TodayIsEkadasi";
+import useIsEkadasiBoolean from "../../hooks/useIsEkadasiBoolean";
+import Dates from "../../constants/Dates";
+import schedulePushNotification from "../../hooks/useSchedulePushNotifications";
 
-class DisplayNextEkadasi extends Component {
-  state = {
-    visible: true,
-    month: new Date().getMonth(),
-    dayOfMonth: new Date().getDate(),
-    dayOfWeek: new Date().getDay(),
-    dayOfMonthPlusOne: new Date().getDate() + 1,
-  };
+const { DAYOFMONTH, DAYOFWEEK, LISTOFDAYS, MONTH } = Dates;
+const weekday = LISTOFDAYS[DAYOFWEEK];
 
-  toggleOverlay = () => {
-    this.setState({ visible: !this.state.visible });
-  };
+export default function DisplayNextEkadasi() {
+  const [visible, setVisible] = useState(false);
+  const getEkadasiObject = useIsEkadasiBoolean();
+  const todayTrue = getEkadasiObject[0];
 
-  render() {
-    let listOfDays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let weekday = listOfDays[this.state.dayOfWeek];
-
-    const { month, dayOfMonth, dayOfMonthPlusOne } = this.state;
-
-    return thisYear2022.map((data, index) => {
-      const monthIdEqualsMonth = Number(data.monthId) === month;
-      const monthIdEqualsMonthPlusOne = Number(data.monthId) === month + 1;
-      const dataDayInMonth = Number(data.dayInMonth);
-      const dataDayOfWeek = data.dayOfWeek;
-
-      if (
-        dayOfMonth === dataDayInMonth &&
-        dataDayOfWeek === weekday &&
-        monthIdEqualsMonth
-      ) {
-        return (
-          <React.Fragment key={index + data.dayInMonth + data.ekadasiName}>
-            <TodayIsEkadasi
-              key={data.dayInMonth}
-              buttonStyle={{ backgroundColor: "#15c240" }}
-              containerStyle={{ marginBottom: 20 }}
-              titleStyle={{ color: "white", fontSize: 30, marginBottom: 10 }}
-              title={"Today is Ekadasi"}
-              isVisible={!this.state.visible}
-              onPress={this.toggleOverlay}
-              dayOfWeek={data.dayOfWeek}
-              monthName={data.monthName}
-              dayInMonth={data.dayInMonth}
-              ekadasiName={data.ekadasiName}
-              breakFastTime={data.breakFastTime}
-              style={{ fontSize: 25 }}
-            />
-          </React.Fragment>
-        );
-      }
-
-      if (
-        (monthIdEqualsMonth && dataDayInMonth > dayOfMonth) ||
-        (monthIdEqualsMonthPlusOne && dataDayInMonth <= dayOfMonth)
-      ) {
-        return (
-          <React.Fragment key={index + data.dayInMonth + data.ekadasiName}>
-            <Text
-              style={{
-                color: "rgba(0,0,0,0.4)",
-                fontSize: 14,
-                lineHeight: 40,
-                textAlign: "center",
-              }}
-            >
-              The next Ekadasi is...
-            </Text>
-            <NextEkadasiIs
-              style={{ fontSize: 25 }}
-              dayOfWeek={data.dayOfWeek}
-              monthName={data.monthName}
-              dayInMonth={data.dayInMonth}
-              ekadasiName={data.ekadasiName}
-            />
-          </React.Fragment>
-        );
-      }
-    });
+  if (todayTrue) {
+    schedulePushNotification(
+      todayTrue.ekadasiName,
+      Number(todayTrue.dayInMonth),
+      Number(todayTrue.monthId)
+    );
+    return (
+      <TodayIsEkadasi
+        key={todayTrue.dayInMonth}
+        title={"Today is Ekadasi"}
+        isVisible={visible}
+        onPress={() => setVisible(!visible)}
+        dayOfWeek={todayTrue.dayOfWeek}
+        monthName={todayTrue.monthName}
+        dayInMonth={todayTrue.dayInMonth}
+        ekadasiName={todayTrue.ekadasiName}
+        breakFastTime={todayTrue.breakFastTime}
+        titleStyle={{ color: "white", fontSize: 30, marginBottom: 10 }}
+        containerStyle={{ marginBottom: 20 }}
+        buttonStyle={{ backgroundColor: "#15c240" }}
+        style={{ fontSize: 25 }}
+      />
+    );
+  } else {
+    return (
+      <RenderNextEkadasiIsConditionally
+        month={MONTH}
+        dayOfMonth={DAYOFMONTH}
+        weekday={weekday}
+      />
+    );
   }
 }
-
-export default DisplayNextEkadasi;

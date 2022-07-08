@@ -1,6 +1,7 @@
 import React from "react";
-import { View } from "react-native";
-import { Button, Text } from "react-native-elements";
+// import { View } from "react-native";
+import { Text, View } from "../Themed";
+import { Button } from "react-native-elements";
 import EkadasiOverlay from "./AboutEkadasiTextOverlay";
 
 export default function TomorowIsEkadasi({

@@ -3,29 +3,22 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import * as React from "react";
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { ColorSchemeName } from "react-native";
+import { RootStackParamList } from "../types";
 
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-import UnityInDiversity from "../screens/UnityInDiversity";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import HomeScreen from "../screens/HomeScreen";
-import PureBhaktiScreen from "../screens/PureBhakti";
-import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types";
+import UnityInDiversity from "../screens/UnityInDiversity";
 import LinkingConfiguration from "./LinkingConfiguration";
+import DrawerNavigator from "./DrawerNavigator";
+import TabStackNavigator from "./TabStackNavigator";
 
 export default function Navigation({
   colorScheme,
@@ -53,101 +46,22 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
-        component={BottomTabNavigator}
+        component={DrawerNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="BottomTabs" component={TabStackNavigator} />
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="UnityInDiversity"
+          component={UnityInDiversity}
+          options={{ title: "Unity In Diversity" }}
+        />
+      </Stack.Group>
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="UnityInDiversity" component={UnityInDiversity} />
-      </Stack.Group>
     </Stack.Navigator>
   );
-}
-
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
-
-function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        headerStyle: {
-          backgroundColor: "rgba(0,0,0,0.05)",
-        },
-        headerTintColor: "#242c40",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<"Home">) => ({
-          headerTitle: "May All Be Blessed",
-
-          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("UnityInDiversity")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-        })}
-      />
-      <BottomTab.Screen
-        name="PureBhakti"
-        component={PureBhaktiScreen}
-        options={({ navigation }: RootTabScreenProps<"PureBhakti">) => ({
-          title: "Pure Bhakti",
-          tabBarIcon: ({ color }) => <TabBarIcon name="flag" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("UnityInDiversity")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-        })}
-      />
-    </BottomTab.Navigator>
-  );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }

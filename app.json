@@ -4,9 +4,9 @@
     "description": "Keep track of upcoming Ekadasi dates.",
     "slug": "ekadasi",
     "privacy": "public",
-    "githubUrl": "https://github.com/dominick-designs/react-native-app-ekadasi",
+    "githubUrl": "https://github.com/vital-tech-results/ekadasi-app",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.22",
+    "version": "0.0.26",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -23,7 +23,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.23",
+      "buildNumber": "0.0.28",
       "supportsTablet": true,
       "requireFullScreen": true,
       "appStoreUrl": "https://apps.apple.com/us/app/next-ekadasi/id1517935088",
@@ -37,7 +37,7 @@
       "useNextNotificationsApi": true,
       "permissions": [],
       "googleServicesFile": "./google-services.json",
-      "versionCode": 23
+      "versionCode": 26
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
