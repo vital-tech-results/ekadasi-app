@@ -174,8 +174,8 @@ export const thisYear2022 = [
   {
     ekadasiName: "Indira",
     monthName: "July",
-    dayInMonth: "9",
-    dayOfWeek: "Saturday",
+    dayInMonth: "22",
+    dayOfWeek: "Friday",
     monthId: "6",
     aboutThisEkadasi: "",
     breakFastTime: "06:08 — 10:10",

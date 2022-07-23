@@ -11,10 +11,10 @@ import { TailwindProvider } from "nativewind";
 import NotificationHandler from "./hooks/useNotificationHandler";
 
 import * as Notifications from "expo-notifications";
-import * as Device from "expo-device";
 
-// import schedulePushNotification from "./components/Notifications/ScheduleNotifications";
-// import schedulePushNotificationAndroid from "./components/Notifications/ScheduleNotificationsAndroid";
+// import * as Device from "expo-device";
+
+// import schedulePushNotification from "./hooks/useSchedulePushNotifications";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -32,8 +32,7 @@ Notifications.setNotificationHandler({
 
 // see if device is android or ios
 // if ios run this notification otherwise run this notif....
-// Device.osName === "iOS"
-//   ? schedulePushNotification()
+// Device.osName === "iOS" ? schedulePushNotification : null;
 //   : schedulePushNotificationAndroid();
 
 export default function App() {

@@ -6,7 +6,7 @@
     "privacy": "public",
     "githubUrl": "https://github.com/vital-tech-results/ekadasi-app",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.26",
+    "version": "0.0.27",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -23,7 +23,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.28",
+      "buildNumber": "0.0.29",
       "supportsTablet": true,
       "requireFullScreen": true,
       "appStoreUrl": "https://apps.apple.com/us/app/next-ekadasi/id1517935088",

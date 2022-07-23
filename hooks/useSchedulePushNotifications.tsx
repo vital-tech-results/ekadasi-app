@@ -1,4 +1,3 @@
-import React from "react";
 import * as Notifications from "expo-notifications";
 
 interface SchedulePushNotificationProps {
@@ -12,8 +11,8 @@ export default async function schedulePushNotification({
   dayInMonth,
   monthId,
 }: SchedulePushNotificationProps) {
-  const body = `Today is ${ekadasiName} Ekadasi.`;
   Notifications.cancelAllScheduledNotificationsAsync();
+  const body = `Today is ${ekadasiName} Ekadasi.`;
   await Notifications.scheduleNotificationAsync({
     content: {
       badge: 1,
@@ -21,6 +20,6 @@ export default async function schedulePushNotification({
       title: "Hare Krsna! Friendly reminder:",
       body: body,
     },
-    trigger: { month: monthId, day: dayInMonth, second: 5 },
+    trigger: { repeats: false, month: monthId, day: dayInMonth, second: 5 },
   });
 }
