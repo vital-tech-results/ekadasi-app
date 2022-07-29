@@ -28,7 +28,7 @@
       "requireFullScreen": true,
       "appStoreUrl": "https://apps.apple.com/us/app/next-ekadasi/id1517935088",
       "infoPlist": {
-        "UIBackgroundModes": ["fetch"]
+        "UIBackgroundModes": ["remote-notification"]
       }
     },
     "android": {

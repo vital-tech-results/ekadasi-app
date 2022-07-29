@@ -9,7 +9,7 @@ export default function NextEkadasiIs({
   ekadasiName,
 }) {
   return (
-    <Text style={style}>
+    <Text className={style} lightColor="#123b7a" darkColor="#2a2e36">
       {dayOfWeek}, {monthName} {dayInMonth}: {ekadasiName}
     </Text>
   );

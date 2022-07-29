@@ -36,6 +36,6 @@ export default function useIsEkadasiBoolean() {
     //*call the above funtion here
     isTodayEkadasi();
   }, []);
-
+  console.log(isEkadasi);
   return isEkadasi;
 }

@@ -15,6 +15,7 @@ export default function DisplayNextEkadasi() {
   const todayTrue = getEkadasiObject[0];
 
   if (todayTrue) {
+    // schedulePushNotification();
     schedulePushNotification(
       todayTrue.ekadasiName,
       Number(todayTrue.dayInMonth),

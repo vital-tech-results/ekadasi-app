@@ -17,17 +17,14 @@ const RenderNextEkadasiIsConditionally = (props) => {
       return (
         <React.Fragment key={index + data.dayInMonth + data.ekadasiName}>
           <Text
-            style={{
-              color: "rgba(0,0,0,0.4)",
-              fontSize: 14,
-              lineHeight: 40,
-              textAlign: "center",
-            }}
+            className="text-xs text-right leading-8 "
+            lightColor="#004ebd"
+            darkColor="#06349a"
           >
             The next Ekadasi is...
           </Text>
           <NextEkadasiIs
-            style={{ fontSize: 25 }}
+            style="text-xl text-left leading-10"
             dayOfWeek={data.dayOfWeek}
             monthName={data.monthName}
             dayInMonth={data.dayInMonth}
